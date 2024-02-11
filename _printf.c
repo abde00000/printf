@@ -1,4 +1,28 @@
 #include "main.h"
+int print_f(char spec, va_list arg)
+{
+	int count = 0;
+	switch (spec)
+	{
+		case 'c':
+			count += print_c(va_arg(arg, int));
+			break;
+		case 's':
+			count += print_s(va_arg(arg, char *));
+			break;
+		case 'i':
+		case 'd':
+			count += print_dig((long)(va_arg(arg, int)), 10);
+			break;
+		case 'x':
+			count += print_dig((long)(va_arg(arg, unsigned int)), 16);
+			break;
+		default:
+			count += print_c(spec);
+			break;
+	}
+	return count;
+}
 /**
  * _printf - functions as printf
  * @format: specifiers
@@ -9,40 +33,22 @@ int _printf(const char *format, ...)
 {
     int count = 0;
     va_list arg;
-    char buffer[1024];
-    if (format == NULL)
-        return (-1);
+    
     va_start(arg, format);
     while (*format)
     {
-        if (*format == '%' && format[1])
+        if (*format == '%')
         {
-        format++;
-        if (*format == 'c')
-            count += _putchar(va_arg(args, int));
-        else if (*format == 's')
-            count += handle_string(va_arg(args, char *));
-        else if (*format == 'i' || *format == 'd')
-        {
-            _sprintf(buffer, "%d", va_arg(args, int));
-            count += handle_string(buffer);
-        }
-        else if (*format == '%')
-            count += _putchar('%');
-        else
-        {
-            count += _putchar('%');
-            count += _putchar(*format);
-        }
-        }
-            else if (*format == '%' && format[1] == '\0')
-        {
-            return (-1);
+            format++;
+            count += print_f(*format, arg);
         }
         else
-            count += _putchar(*format);
+        {
+            count += print_c(*format);
+        }
         format++;
     }
-va_end(args);
-return (count);
+    va_end(arg);
+    return count;
 }
+
