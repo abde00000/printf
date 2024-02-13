@@ -17,6 +17,9 @@ int print_f(char spec, va_list arg)
 		case 'x':
 			count += print_dig((long)(va_arg(arg, unsigned int)), 16);
 			break;
+		case 'b':
+			count += print_b(va_arg(arg, int));
+			break;
 		default:
 			count += print_c(spec);
 			break;

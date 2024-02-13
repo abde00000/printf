@@ -9,7 +9,7 @@
  */
 int main(void)
 {
-    int len;
+    /* int len;
     int len2;
     unsigned int ui;
     void *addr;
@@ -39,6 +39,10 @@ int main(void)
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
-    printf("Unknown:[%r]\n");
+    printf("Unknown:[%r]\n"); */
+    int n = _printf("%b\n", 8);
+    printf("%d\n", n);
+    _printf("%d\n", n);
+
     return (0);
 }
