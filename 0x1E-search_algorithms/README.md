@@ -1,6 +1,6 @@
  - Search Algorithms
 
-- Implementation of various types of search algorithms and stated the corresponding space/time
+- I.mplementation of various types of search algorithms and stated the corresponding space/time
 complexities for each.
 
 ## Tests :heavy_check_mark:
