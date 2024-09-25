@@ -1,46 +1,57 @@
-#include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 
 /**
- * main - check the code
+ * _free_list - Realease the memory allocated for a list
+ *
+ * @head: A pointer to the first node of the list to free
+ */
+void _free_list(list_t *head)
+{
+	if (head)
+	{
+		_free_list(head->next);
+		if (head->str)
+			free(head->str);
+		free(head);
+	}
+}
+
+/**
+ * main - check the code .
  *
  * Return: Always 0.
  */
 int main(void)
 {
-    list_t *head;
+	list_t *head;
+	char *strings[131] = {
+		"Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Plug it, play it, burn it, rip it,", "Drag and drop it, zip - unzip it,", "Lock it, fill it, call it, find it,", "View it, code it, jam - unlock it,", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it,", "Name it, rate it, tune it, print it,", "Scan it, send it, fax - rename it,", "Touch it, bring it, pay it, watch it,", "Turn it, leave it, start - format it.", "Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Plug it, play it, burn it, rip it,", "Drag and drop it, zip - unzip it,", "Lock it, fill it, call it, find it,", "View it, code it, jam - unlock it,", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it,", "Name it, rate it, tune it, print it,", "Scan it, send it, fax - rename it,", "Touch it, bring it, pay it, watch it,", "Turn it, leave it, start - format it.", "Technologic", "Technologic", "Technologic", "Technologic", "Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Plug it, play it, burn it, rip it,", "Drag and drop it, zip - unzip it,", "Lock it, fill it, call it, find it,", "View it, code it, jam - unlock it,", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it,", "Name it, rate it, tune it, print it,", "Scan it, send it, fax - rename it", "Touch it, bring it, pay it, watch it,", "Turn it, leave it, start - format it.", "Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Plug it, play it, burn it, rip it,", "Drag and drop it, zip - unzip it", "Touch it, bring it, pay it, watch it,", "Turn it, leave it, start - format it.", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it", "Lock it, fill it, call it, find it,", "View it, code it, jam - unlock it,", "Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it", "Name it, rate it, tune it, print it,", "Scan it, send it, fax - rename it", "Touch it, bring it, pay it, watch it,", "Turn it, leave it, start - format it.", "Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Plug it, play it, burn it, rip it,", "Drag and drop it, zip - unzip it", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it,", "Name it, rate it, tune it, print it,", "Scan it, send it, fax - rename it", "Touch it, bring it, pay it, watch it,", "Turn it, leave it, start - format it.", "Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Plug it, play it, burn it, rip it,", "Drag and drop it, zip - unzip it", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it,", "Name it, rate it, tune it, print it,", "Scan it, send it, fax - rename it", "Buy it, use it, break it, fix it,", "Trash it, change it, mail - upgrade it,", "Charge it, point it, zoom it, press it,", "Snap it, work it, quick - erase it,", "Write it, cut it, paste it, save it,", "Load it, check it, quick - rewrite it,", "Plug it, play it, burn it, rip it,", "Drag and drop it, zip - unzip it", "Lock it, fill it, call it, find it,", "View it, code it, jam - unlock it,", "Surf it, scroll it, pause it, click it,", "Cross it, crack it, switch - update it,", "Name it, rate it, tune it, print it,", "Scan it, send it, fax - rename it,", "Touch it, bring it, pay it, watch it,", "Turn it, leave it, start - format it.", "Technologic", "Technologic", "Technologic", "Technologic", "Technologic", "Technologic", "Technologic", "Technologic", "Technologic", "Technologic",
+		NULL
+	};
+	list_t *ptr;
+	int i;
+	size_t n;
 
-    head = NULL;
-    add_node_end(&head, "Anne");
-    add_node_end(&head, "Colton");
-    add_node_end(&head, "Corbin");
-    add_node_end(&head, "Daniel");
-    add_node_end(&head, "Danton");
-    add_node_end(&head, "David");
-    add_node_end(&head, "Gary");
-    add_node_end(&head, "Holden");
-    add_node_end(&head, "Ian");
-    add_node_end(&head, "Ian");
-    add_node_end(&head, "Jay");
-    add_node_end(&head, "Jennie");
-    add_node_end(&head, "Jimmy");
-    add_node_end(&head, "Justin");
-    add_node_end(&head, "Kalson");
-    add_node_end(&head, "Kina");
-    add_node_end(&head, "Matthew");
-    add_node_end(&head, "Max");
-    add_node_end(&head, "Michael");
-    add_node_end(&head, "Ntuj");
-    add_node_end(&head, "Philip");
-    add_node_end(&head, "Richard");
-    add_node_end(&head, "Samantha");
-    add_node_end(&head, "Stuart");
-    add_node_end(&head, "Swati");
-    add_node_end(&head, "Timothy");
-    add_node_end(&head, "Victor");
-    add_node_end(&head, "Walton");
-    print_list(head);
-    return (0);
+	head = NULL;
+	for (i = 0; strings[i]; ++i)
+	{
+		ptr = add_node_end(&head, strings[i]);
+		if (!ptr || !ptr->str)
+		{
+			printf("Failed\n");
+			_free_list(head);
+			return (1);
+		}
+		if (ptr->str == strings[i])
+		{
+			printf("A copy of the string should be stored\n");
+			return (1);
+		}
+	}
+	n = print_list(head);
+	printf("-> %lu elements\n", n);
+	_free_list(head);
+	return (0);
 }
